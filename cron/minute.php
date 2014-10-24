@@ -1,9 +1,9 @@
 <?php
 
-require_once( '../config.php' );
+require_once( __DIR__ . '/../config.php' );
 
 // check that the log dir exists
-if ( file_exists( SM_DIR . '/log' ) ) {
+if ( !file_exists( SM_DIR . '/log' ) ) {
 	if( !mkdir( SM_DIR . '/log' ) ) {
 		die('Can not create ' . SM_DIR . '/log' );
 	}
@@ -51,6 +51,6 @@ function clean( $s ) {
 
 
 // execute command line tools
-exec( '/bin/ps -aef|/bin/grep apache2|/usr/bin/wc >> ' . SM_DIR . '/log/httpd_`/bin/date +"%Y-%m-%d"`.log' );
+exec( '/bin/ps -aef|/bin/grep ' . $proc_name . '|/usr/bin/wc >> ' . SM_DIR . '/log/httpd_`/bin/date +"%Y-%m-%d"`.log' );
 exec( '/usr/bin/uptime >> ' . SM_DIR . '/log/cpu_`date +"%Y-%m-%d"`.log' );
 exec( '/usr/bin/free -m|grep Mem >> ' . SM_DIR . '/log/mem_`date +"%Y-%m-%d"`.log' );
