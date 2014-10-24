@@ -2,6 +2,13 @@
 
 require_once( '../config.php' );
 
+// check that the log dir exists
+if ( file_exists( SM_DIR . '/log' ) ) {
+	if( !mkdir( SM_DIR . '/log' ) ) {
+		die('Can not create ' . SM_DIR . '/log' );
+	}
+}
+
 $filename = SM_DIR . "/log/db." . date('Y-m-d') . ".log";
 $f = fopen( $filename, "a" );
 
