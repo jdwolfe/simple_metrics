@@ -11,3 +11,4 @@ DEFINE( 'SM_CPU_COUNT', 2 ); // cat /proc/cpuinfo
  Name of Web server process that would show up when using the ps command
 */
 $proc_name = 'apache'; // usally either apache or httpd
+$display_name = 'Server Metrics';
