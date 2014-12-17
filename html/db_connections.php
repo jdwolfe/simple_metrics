@@ -21,22 +21,22 @@ if ($is_mini) {
 	* { font-size: 100%; }
 	</style>
 		<?php
-	}
+}
 
-	$data = array();
-	$labels = array();
-	$long_queries = array();
+$data = array();
+$labels = array();
+$long_queries = array();
 
-	$long_queries_count = 0;
+$long_queries_count = 0;
 
-	$date = date('Y-m-d');
-	if (isset ($_GET['d'])) {
-		$date = date('Y-m-d', strtotime($_GET['d']));
-	}
-	$yesterday = date('Y-m-d', strtotime($date . ' -1 day'));
-	$tomorrow = date('Y-m-d', strtotime($date . ' +1 day'));
+$date = date('Y-m-d');
+if (isset ($_GET['d'])) {
+	$date = date('Y-m-d', strtotime($_GET['d']));
+}
+$yesterday = date('Y-m-d', strtotime($date . ' -1 day'));
+$tomorrow = date('Y-m-d', strtotime($date . ' +1 day'));
 
-	?>
+?>
 <div>
 <h1>DB Connections for <?php echo $date; ?></h1>
 <?php

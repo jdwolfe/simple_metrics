@@ -1,0 +1,13 @@
+* {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.mini-chart {
+	float: left;
+}
+
+h1, h2, h3 {
+	margin: 0px;
+	padding: 0px;
+	font-size: -.8em;
+}

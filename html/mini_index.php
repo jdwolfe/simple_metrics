@@ -1,21 +1,34 @@
 <?php
-require_once('../config.php');
+require_once('../functions.php');
+do_header();
+$sm = new SimpleMetrics;
+
 ?>
-<!DOCTYPE html>
+<h2><?php echo $display_name; ?> - Last 2 hours</h2>
+<div class='mini-chart'>
+	<?php
+	$sm->show_db_chart( date('Y-m-d') );
+	?>
+</div>
 
-<html>
+<div class='mini-chart'>
+	<?php
+	$sm->show_http_chart( date('Y-m-d') );
+	?>
+</div>
 
-<head>
-  <title><?php echo $display_name; ?> - Last 2 hours</title>
-</head>
+<div class='mini-chart'>
+	<?php
+	$sm->show_cpu_chart( date('Y-m-d') );
+	?>
+</div>
 
-<body>
+<div class='mini-chart'>
+	<?php
+	$sm->show_memory_chart( date('Y-m-d') );
+	?>
+</div>
 
-<h1><?php echo $display_name; ?> - Last 2 hours</h1>
-<iframe src="/metrics/db_connections.php?mini=1" frameborder="0" width="350" height="310"></iframe>
-<iframe src="/metrics/http_connections.php?mini=1" frameborder="0" width="350" height="310"></iframe>
-<iframe src="/metrics/cpu_load.php?mini=1" frameborder="0" width="350" height="310"></iframe>
-<iframe src="/metrics/mem_free.php?mini=1" frameborder="0" width="350" height="310"></iframe>
+<?php
 
-</body>
-</html>
+do_footer();

@@ -50,7 +50,7 @@ if ( file_exists( SM_DIR . '/log/cpu_' . $date . '.log' ) ) {
 		$hour = trim( substr( $line, 1, 2 ) );
 		$min = trim( substr( $line, 4, 2 ) );
 		$parts = explode(',', $line);
-		$part_num = stristr( 'days', $line ) > 0 ? 3 : 2; // if it is up less than 1 day
+		$part_num = stripos( $line, 'days' ) > 0 ? 3 : 2; // if it is up less than 1 day
 		$parts2 = explode(' ', trim($parts[ $part_num ]));
 		$load[] = trim($parts2[2]);
 		$max_load[] = SM_CPU_COUNT;
