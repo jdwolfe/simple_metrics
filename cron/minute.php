@@ -22,24 +22,25 @@ $data = array(
 $db = mysql_connect( DATABASE_HOST, DATABASE_USER, DATABASE_PASS );
 if (!$db) {
 	$data['q'] = "Failed to connect to MySQL: " . mysql_error();
-	fputcsv($f, $data);
-	fclose($f);
-	exit;
-}
+	$data['num'] = SM_SQL_MAX_CONNECT;
+	fputcsv( $f, $data );
+} else {
 
-$sql = 'show full processlist';
-$result = mysql_query($sql);
-$data['num'] = mysql_num_rows( $result );
-fputcsv( $f, $data );
+	$sql = 'show full processlist';
+	$result = mysql_query($sql);
+	$data['num'] = mysql_num_rows( $result );
+	fputcsv( $f, $data );
 
-while( $row = mysql_fetch_object( $result ) ) {
-	$info = clean( $row->Info );
-	if ( $row->Time > 0 && $info != '' ) {
-		$data['t'] = $row->Time;
-		$data['q'] = $info;
-		fputcsv( $f, $data );
+	while( $row = mysql_fetch_object( $result ) ) {
+		$info = clean( $row->Info );
+		if ( $row->Time > 0 && $info != '' ) {
+			$data['t'] = $row->Time;
+			$data['q'] = $info;
+			fputcsv( $f, $data );
+		}
 	}
 }
+
 fclose( $f );
 
 function clean( $s ) {
