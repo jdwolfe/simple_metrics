@@ -219,7 +219,7 @@ class SimpleMetrics {
 				$hour = trim( substr( $line, 1, 2 ) );
 				$min = trim( substr( $line, 4, 2 ) );
 				$parts = explode(',', $line);
-				$part_num = stripos( $line, 'days' ) > 0 ? 3 : 2; // if it is up less than 1 day
+				$part_num = stripos( $line, 'day' ) > 0 ? 3 : 2; // if it is up less than 1 day
 				$parts2 = explode(' ', trim($parts[ $part_num ]));
 				$load[] = trim($parts2[2]);
 				$max_load[] = SM_CPU_COUNT;
