@@ -1,6 +1,6 @@
 <?php
 
-require_once( __DIR__ . '/../config.php' );
+require_once( dirname(__FILE__) . '/../config.php' );
 
 // check that the log dir exists
 if ( !file_exists( SM_DIR . '/log' ) ) {
