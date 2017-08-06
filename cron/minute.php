@@ -19,26 +19,31 @@ $data = array(
 	'q' => ''
 );
 
-$db = mysql_connect( DATABASE_HOST, DATABASE_USER, DATABASE_PASS );
+$db = new mysqli( DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME );
 if (!$db) {
-	$data['q'] = "Failed to connect to MySQL: " . mysql_error();
+	$data['q'] = "Failed to connect to MySQL: " . mysqli_connect_error();
 	$data['num'] = SM_SQL_MAX_CONNECT;
 	fputcsv( $f, $data );
 } else {
 
 	$sql = 'show full processlist';
-	$result = mysql_query($sql);
-	$data['num'] = mysql_num_rows( $result );
+	$stmt = $db->prepare( $sql );
+	$stmt->execute();
+	$stmt->store_result();
+	$data['num'] = $stmt->num_rows;
 	fputcsv( $f, $data );
 
-	while( $row = mysql_fetch_object( $result ) ) {
-		$info = clean( $row->Info );
-		if ( $row->Time > 0 && $info != '' ) {
-			$data['t'] = $row->Time;
+	$stmt->bind_result( $Id, $User, $Host, $Db, $Command, $Time, $State, $Info );
+	while( $stmt->fetch() ) {
+		$info = clean( $Info );
+		if ( $Time > 0 && $info != '' ) {
+			$data['t'] = $Time;
 			$data['q'] = $info;
 			fputcsv( $f, $data );
 		}
 	}
+	$stmt->close();
+	$db->close();
 }
 
 fclose( $f );
